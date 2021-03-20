@@ -49,7 +49,7 @@ def show_MNIST(img):
 if __name__ == '__main__':
     # GLOBAL SETTINGS
     TRAIN_IMAGE_SIZE    = 256
-    DATASET_PATH        = "dataset"
+    #DATASET_PATH        = "dataset"
     #STYLE_IMAGE_PATH    = "styleimages/mosaic.jpg"
     #NUM_EPOCHS         = 1
     #BATCH_SIZE          = 4
@@ -78,7 +78,7 @@ if __name__ == '__main__':
                                     transforms.ToTensor(),
                                     transforms.Lambda(lambda x: x.mul(255))])
 
-    train_dataset   = datasets.ImageFolder(DATASET_PATH, transform=transform)
+    train_dataset   = datasets.ImageFolder('./dataset', transform=transform)
     train_loader    = torch.utils.data.DataLoader(train_dataset, batch_size=opts.BATCH_SIZE, shuffle=True, **kwargs)
 
     # Load networks
