@@ -62,9 +62,8 @@ if __name__ == '__main__':
     SEED                = 35
     PLOT_LOSS           = 1
 
-    if not os.path.isdir(opts.SAVE_MODEL_PATH):
-        os.mkdir(opts.SAVE_MODEL_PATH)
-        os.mkdir(opts.SAVE_IMAGE_PATH)
+    if not os.path.exists(opts.SAVE_IMAGE_PATH):
+        os.makedirs(opts.SAVE_IMAGE_PATH)
 
     # Seeds
     torch.manual_seed(SEED)
