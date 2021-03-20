@@ -13,8 +13,8 @@ def str2bool(b_str):
 
 parser  = argparse.ArgumentParser(description='Args of Train')
 parser.add_argument('--style_path', type=str, default='pretrained/transformer_weight.pth', help='load model path')
-parser.add_argument('--frame_folder', type=str, default='images/test/', help='image source')
-parser.add_argument('--save_folder', type=str, default='images/results/', help='result save')
+parser.add_argument('--frame_folder', type=str, default='data/images/test/', help='image source')
+parser.add_argument('--save_folder', type=str, default='results/images/', help='result save')
 parser.add_argument('--PRESERVE_COLOR', type=str2bool, default=False, help='preserve original color')
 parser.add_argument('--cuda', type=str2bool, default=False, help='enables CUDA training')
 opts    = parser.parse_args()
@@ -69,8 +69,8 @@ def stylize_folder(style_path, frame_folder, save_folder, batch_size=1):
             utils.saveimg(generated_image, save_folder + image_name)
 
 if __name__ == '__main__':
-    if not os.path.isdir(opts.save_folder):
-        os.mkdir(opts.save_folder)
+    if not os.path.exists(opts.save_folder):
+        os.makedirs(opts.save_folder)
 
     # Load Transformer Network
     net = transformer.TransformerNetwork()

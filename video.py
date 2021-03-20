@@ -13,11 +13,10 @@ def str2bool(b_str):
 parser  = argparse.ArgumentParser(description='Args of Train')
 parser.add_argument('--BATCH_SIZE', type=int, default=20, help='input batch size')
 parser.add_argument('--style_path', type=str, default='pretrained/transformer_weight.pth', help='load model path')
-parser.add_argument('--video_path', type=str, default='video/test/source.mp4', help='video file')
-parser.add_argument('--VIDEO_EXTRACT_FOLDER', type=str, default='video/extract/', help='video folder')
-parser.add_argument('--FRAME_TRANSFORM_FOLDER', type=str, default='video/transform/', help='video folder')
-parser.add_argument('--STYLE_VIDEO_SAVE_PATH', type=str, default='video/results/', help='video folder')
-parser.add_argument('--STYLE_VIDEO_SAVE_NAME', type=str, default='target.avi', help='video folder')
+parser.add_argument('--video_path', type=str, default='data/video/test/source.mp4', help='video file')
+parser.add_argument('--VIDEO_EXTRACT_FOLDER', type=str, default='results/video/extract/', help='video folder')
+parser.add_argument('--FRAME_TRANSFORM_FOLDER', type=str, default='results/video/transform/', help='video folder')
+parser.add_argument('--STYLE_VIDEO_SAVE', type=str, default='results/video/target.avi', help='video folder')
 parser.add_argument('--cuda', type=str2bool, default=False, help='enables CUDA training')
 opts    = parser.parse_args()
 device  = ("cuda:0" if opts.cuda else "cpu")
@@ -78,15 +77,12 @@ def makeVideo(frames_path, save_name, fps, height, width):
 #video_transfer(video_name, STYLE_PATH)
 # def video_transfer(video_path, style_path):
 if __name__ == '__main__':
-    if not os.path.isdir(opts.VIDEO_EXTRACT_FOLDER):
-        os.mkdir(opts.VIDEO_EXTRACT_FOLDER)
+    if not os.path.exists(opts.VIDEO_EXTRACT_FOLDER):
+        os.makedirs(opts.VIDEO_EXTRACT_FOLDER)
     
-    if not os.path.isdir(opts.FRAME_TRANSFORM_FOLDER):
-        os.mkdir(opts.FRAME_TRANSFORM_FOLDER)
+    if not os.path.exists(opts.FRAME_TRANSFORM_FOLDER):
+        os.makedirs(opts.FRAME_TRANSFORM_FOLDER)
     
-    if not os.path.isdir(opts.STYLE_VIDEO_SAVE_PATH):
-        os.mkdir(opts.STYLE_VIDEO_SAVE_PATH)
-
     #print("OpenCV {}".format(cv2.__version__))
     starttime = time.time()
     # Extract video info
@@ -103,5 +99,5 @@ if __name__ == '__main__':
 
     # Combine all frames
     print("Combining style frames into one video")
-    makeVideo(opts.FRAME_TRANSFORM_FOLDER, opts.STYLE_VIDEO_SAVE_PATH + opts.STYLE_VIDEO_SAVE_NAME, fps, int(H), int(W))
+    makeVideo(opts.FRAME_TRANSFORM_FOLDER, opts.STYLE_VIDEO_SAVE, fps, int(H), int(W))
     print("Elapsed Time: {}".format(time.time() - starttime))
