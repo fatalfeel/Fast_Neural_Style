@@ -11,7 +11,7 @@ This implemention follows the style transfer approach outlined in [**Perceptual 
 - ./install_data.sh
 - or
 - bash -x ./install_data.sh
-- 
+
 # Comparison of Transformer Networks on experimental.py
 
 |                       Network                      | size (Kb) | no. of parameters | final loss (million) |
