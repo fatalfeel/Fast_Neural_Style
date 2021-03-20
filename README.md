@@ -14,8 +14,8 @@ An implementation of **fast-neural-style** in PyTorch! Style Transfer learns the
 python3 ./train.py --cuda True
 
 # Test data
-python3 ./stylize.py --cuda True
-python3 ./video.py --cuda True
+- python3 ./stylize.py --cuda True
+- python3 ./video.py --cuda True
 
 # Comparison of Transformer Networks on experimental.py
 |                       Network                      | size (Kb) | no. of parameters | final loss (million) |
