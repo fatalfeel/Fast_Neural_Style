@@ -1,4 +1,4 @@
-# fast-neural-style: Fast Style Transfer in Pytorch! :art:
+# fast-neural-style: Fast Style Transfer in Pytorch!
 
 An implementation of **fast-neural-style** in PyTorch! Style Transfer learns the aesthetic style of a `style image`, usually an art work, and applies it on another `content image`. This repository contains codes the can be used for:
 1. fast `image-to-image` aesthetic style transfer, 
