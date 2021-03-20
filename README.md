@@ -9,7 +9,7 @@ This implemention follows the style transfer approach outlined in [**Perceptual 
 # Prepare data
 ./install_data.sh
 
-# Comparison of Different Transformer Networks on experimental.py
+# Comparison of Transformer Networks on experimental.py
 
 |                       Network                      | size (Kb) | no. of parameters | final loss (million) |
 |:---------------------------------------------------|----------:|------------------:|---------------------:|
