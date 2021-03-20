@@ -5,15 +5,19 @@ An implementation of **fast-neural-style** in PyTorch! Style Transfer learns the
 2. `image-to-video` aesthetic style transfer, and for
 3. training `style-learning` transformation network
 
-This implemention follows the style transfer approach outlined in [**Perceptual Losses for Real-Time Style Transfer and Super-Resolution**](https://arxiv.org/abs/1603.08155) paper by *Justin Johnson, Alexandre Alahi, and Fei-Fei Li*, along with the [supplementary paper detailing the exact model architecture](https://cs.stanford.edu/people/jcjohns/papers/fast-style/fast-style-supp.pdf) of the mentioned paper. The idea is to train a **`separate feed-forward neural network (called Transformation Network) to transform/stylize`** an image and use backpropagation to learn its parameters, instead of directly manipulating the pixels of the generated image as discussed in [A Neural Algorithm of Artistic Style aka **neural-style**](https://arxiv.org/abs/1508.06576) paper by *Leon A. Gatys, Alexander S. Ecker, and Matthias Bethge*. The use of feed-forward transformation network allows for fast stylization of images, around 1000x faster than neural style.
-
 # Prepare data
 - ./install_data.sh
 - or
 - bash -x ./install_data.sh
 
-# Comparison of Transformer Networks on experimental.py
+# Train data
+python3 ./train.py --cuda True
 
+# Test data
+python3 ./stylize.py --cuda True
+python3 ./video.py --cuda True
+
+# Comparison of Transformer Networks on experimental.py
 |                       Network                      | size (Kb) | no. of parameters | final loss (million) |
 |:---------------------------------------------------|----------:|------------------:|---------------------:|
 | transformer/TransformerNetwork                     |     6,573 |         1,679,235 |                 9.88 |
