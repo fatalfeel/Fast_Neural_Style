@@ -19,20 +19,18 @@ def str2bool(b_str):
         return False
 
 parser  = argparse.ArgumentParser(description='Args of Train')
-parser.add_argument('--NUM_EPOCHS', type=int, default=10, help='train epoch numbers')
-parser.add_argument('--BATCH_SIZE', type=int, default=4, help='input batch size')
-parser.add_argument('--CONTENT_WEIGHT', type=float, default=17.0, help='CONTENT WEIGHT')
-parser.add_argument('--STYLE_WEIGHT', type=float, default=50.0, help='STYLE WEIGHT')
-parser.add_argument('--ADAM_LR', type=float, default=0.0002, help='initial learning rate for adam')
-parser.add_argument('--STYLE_IMAGE_PATH', type=str, default='data/images/style/mosaic.jpg', help='style image file')
-parser.add_argument('--SAVE_MODEL_EVERY', type=int, default=100, help='how many processes number to save')
-parser.add_argument('--SAVE_MODEL_PATH', type=str, default='checkpoints/', help='save model')
-parser.add_argument('--SAVE_IMAGE_PATH', type=str, default='checkpoints/results/', help='save result')
-parser.add_argument('--SAVE_FINAL_PATH', type=str, default='pretrained/', help='save the lastest model')
-parser.add_argument('--cuda', type=str2bool, default=False, help='enables CUDA training')
+parser.add_argument('--NUM_EPOCHS',         type=int, default=10, help='train epoch numbers')
+parser.add_argument('--BATCH_SIZE',         type=int, default=4, help='input batch size')
+parser.add_argument('--CONTENT_WEIGHT',     type=float, default=17.0, help='CONTENT WEIGHT')
+parser.add_argument('--STYLE_WEIGHT',       type=float, default=50.0, help='STYLE WEIGHT')
+parser.add_argument('--ADAM_LR',            type=float, default=0.0002, help='initial learning rate for adam')
+parser.add_argument('--STYLE_IMAGE_PATH',   type=str, default='data/images/style/mosaic.jpg', help='style image file')
+parser.add_argument('--SAVE_MODEL_EVERY',   type=int, default=100, help='how many processes number to save')
+parser.add_argument('--SAVE_MODEL_PATH',    type=str, default='checkpoints/', help='save model')
+parser.add_argument('--SAVE_IMAGE_PATH',    type=str, default='checkpoints/results/', help='save result')
+parser.add_argument('--SAVE_FINAL_PATH',    type=str, default='pretrained/', help='save the lastest model')
+parser.add_argument('--cuda',               type=str2bool, default=False, help='enables CUDA training')
 opts    = parser.parse_args()
-device  = ("cuda:0" if opts.cuda else "cpu")
-kwargs  = {'num_workers': 1, 'pin_memory': True} if opts.cuda else {}
 
 def NormalizeImg(img):
     nimg = (img - img.min()) / (img.max() - img.min())
@@ -49,18 +47,11 @@ def show_MNIST(img):
 if __name__ == '__main__':
     # GLOBAL SETTINGS
     TRAIN_IMAGE_SIZE    = 256
-    #DATASET_PATH        = "dataset"
-    #STYLE_IMAGE_PATH    = "styleimages/mosaic.jpg"
-    #NUM_EPOCHS         = 1
-    #BATCH_SIZE          = 4
-    #CONTENT_WEIGHT      = 17
-    #STYLE_WEIGHT        = 50
-    #ADAM_LR             = 0.001
-    #SAVE_MODEL_PATH     = "models/"
-    #SAVE_IMAGE_PATH     = "images/out/"
-    #SAVE_MODEL_EVERY    = 500  # 2,000 Images with batch size 4
     SEED                = 35
     PLOT_LOSS           = 1
+
+    device = ("cuda:0" if opts.cuda else "cpu")
+    kwargs = {'num_workers': 8, 'pin_memory': True} if opts.cuda else {}
 
     if not os.path.exists(opts.SAVE_IMAGE_PATH):
         os.makedirs(opts.SAVE_IMAGE_PATH)
